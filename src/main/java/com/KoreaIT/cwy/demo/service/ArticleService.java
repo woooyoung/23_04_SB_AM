@@ -1,6 +1,5 @@
 package com.KoreaIT.cwy.demo.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +16,6 @@ public class ArticleService {
 
 	public ArticleService(ArticleRepository articleRepository) {
 		this.articleRepository = articleRepository;
-		articleRepository.makeTestData();
 	}
 
 	// 서비스 메서드
