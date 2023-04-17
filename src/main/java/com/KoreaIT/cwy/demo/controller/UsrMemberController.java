@@ -23,14 +23,4 @@ public class UsrMemberController {
 		return "가입!";
 	}
 
-//	@RequestMapping("/usr/article/doWrite")
-//	@ResponseBody
-//	public Article doWrite(String title, String body) {
-//		int id = articleService.writeArticle(title, body);
-//
-//		Article article = articleService.getArticle(id);
-//
-//		return article;
-//	}
-
 }
