@@ -11,7 +11,7 @@ public interface MemberRepository {
 
 	@Insert("""
 			INSERT INTO `member`
-			set regDate = NOW(),
+			SET regDate = NOW(),
 			updateDate = NOW(),
 			loginId = #{loginId},
 			loginPw = #{loginPw},
