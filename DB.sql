@@ -80,8 +80,23 @@ loginPw = 'test2',
 cellphoneNum = '01067896789',
 email = 'zxcv@gmail.com';
 
+# 게시물 테이블 구조 변경 - memberId 추가
+ALTER TABLE article ADD COLUMN memberId INT(10) UNSIGNED NOT NULL AFTER `updateDate`;
+
+UPDATE article 
+SET memberId = 2
+WHERE id IN(1,2);
+
+UPDATE article 
+SET memberId = 3
+WHERE id = 3;
+
+###################################################################
+
 SELECT * FROM article;
 SELECT * FROM `member`;
+
+
 
 DESC `member`;
 

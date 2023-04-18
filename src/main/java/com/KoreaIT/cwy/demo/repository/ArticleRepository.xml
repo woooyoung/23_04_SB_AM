@@ -7,8 +7,9 @@
 	<insert id="writeArticle">
 		INSERT INTO article
 		SET regDate = NOW(),
-		updateDate=
+		updateDate =
 		NOW(),
+		memberId = #{memberId},
 		title =#{title},
 		`body`= #{body}
 	</insert>
