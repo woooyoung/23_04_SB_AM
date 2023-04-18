@@ -67,8 +67,10 @@ public class UsrArticleController {
 
 	@RequestMapping("/usr/article/getArticles")
 	@ResponseBody
-	public List<Article> getArticles() {
-		return articleService.articles();
+	public ResultData getArticles() {
+		List<Article> articles = articleService.articles();
+
+		return ResultData.from("S-1", "Article List", articles);
 	}
 
 	@RequestMapping("/usr/article/getArticle")
