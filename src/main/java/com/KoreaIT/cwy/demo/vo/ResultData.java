@@ -2,20 +2,20 @@ package com.KoreaIT.cwy.demo.vo;
 
 import lombok.Getter;
 
-public class ResultData {
+public class ResultData<DT> {
 	@Getter
 	private String resultCode;
 	@Getter
 	private String msg;
 	@Getter
-	private Object data1;
+	private DT data1;
 
-	public static ResultData from(String resultCode, String msg) {
+	public static <DT> ResultData<DT> from(String resultCode, String msg) {
 		return from(resultCode, msg, null);
 	}
 
-	public static ResultData from(String resultCode, String msg, Object data1) {
-		ResultData rd = new ResultData();
+	public static <DT> ResultData<DT> from(String resultCode, String msg, DT data1) {
+		ResultData<DT> rd = new ResultData<DT>();
 		rd.resultCode = resultCode;
 		rd.msg = msg;
 		rd.data1 = data1;
@@ -31,7 +31,7 @@ public class ResultData {
 		return isSuccess() == false;
 	}
 
-	public static ResultData newData(ResultData joinRd, Object newData) {
+	public static <DT> ResultData<DT> newData(ResultData joinRd, DT newData) {
 		return from(joinRd.getResultCode(), joinRd.getMsg(), newData);
 	}
 }
