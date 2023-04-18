@@ -11,7 +11,6 @@ import com.KoreaIT.cwy.demo.service.ArticleService;
 import com.KoreaIT.cwy.demo.util.Ut;
 import com.KoreaIT.cwy.demo.vo.Article;
 import com.KoreaIT.cwy.demo.vo.ResultData;
-import com.fasterxml.jackson.core.type.WritableTypeId;
 
 @Controller
 public class UsrArticleController {
