@@ -8,6 +8,18 @@
 </head>
 <body>
 		<h1>LIST</h1>
+		<header>
+				<a href="/">로고</a>
+
+				<ul>
+						<li>
+								<a href="/">HOME</a>
+						</li>
+						<li>
+								<a href="../article/list">LIST</a>
+						</li>
+				</ul>
+		</header>
 
 		<hr />
 		<table border="1">

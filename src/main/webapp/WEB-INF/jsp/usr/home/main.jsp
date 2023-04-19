@@ -7,9 +7,22 @@
 </head>
 <body>
 
-		<h1>MAIN</h1>
-		Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga alias sit impedit libero voluptatibus illo quos modi
-		quisquam enim architecto quaerat eum quia consectetur id voluptate praesentium dicta asperiores dolorum.
+		<h1>Main Page</h1>
+		<header>
+				<a href="/">로고</a>
+
+				<ul>
+						<li>
+								<a href="/">HOME</a>
+						</li>
+						<li>
+								<a href="../article/list">LIST</a>
+						</li>
+				</ul>
+		</header>
+		<hr />
+		<div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis aperiam qui beatae est expedita quasi
+				repellat nemo aspernatur adipisci ipsum ipsa quos ex debitis sit voluptas odit nulla eius laudantium.</div>
 
 </body>
 </html>
