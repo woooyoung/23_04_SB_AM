@@ -31,6 +31,13 @@ public class ArticleService {
 
 	}
 
+	public ResultData actorCanModify(int loginedMemberId, Article article) {
+		if (article.getMemberId() != loginedMemberId) {
+			return ResultData.from("F-2", Ut.f("해당 글에 대한 권한이 없습니다"));
+		}
+		return ResultData.from("S-1", "수정 가능");
+	}
+
 	public Article getArticle(int id) {
 		return articleRepository.getArticle(id);
 	}
@@ -39,11 +46,17 @@ public class ArticleService {
 		articleRepository.deleteArticle(id);
 	}
 
-	public void modifyArticle(int id, String title, String body) {
+	public ResultData modifyArticle(int id, String title, String body) {
+
 		articleRepository.modifyArticle(id, title, body);
+
+		Article article = getArticle(id);
+
+		return ResultData.from("S-1", Ut.f("%d번 글을 수정 했습니다", id), article);
 	}
 
 	public List<Article> articles() {
 		return articleRepository.getArticles();
 	}
+
 }
