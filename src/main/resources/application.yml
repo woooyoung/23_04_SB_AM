@@ -13,3 +13,7 @@ spring:
     password: 
 mybatis:
   type-aliases-package: com.KoreaIT.cwy.demo.vo
+custom:
+  logging:
+    dir: log
+    level: debug
