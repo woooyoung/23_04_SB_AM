@@ -39,10 +39,19 @@ html>body {
 	font-family: 'LotteMartDream', sans-serif;
 }
 
-/* 라이브러리 */
+/* 커스텀 */
 .table-box-type-1 thead th, .table-box-type-1 tbody th,
 	.table-box-type-1 td {
 	border: 1px solid black;
 	padding: 10px;
 	text-align: center;
+}
+
+.btn-text-link {
+	color: #1f1f1f;
+}
+
+.btn-text-link:hover {
+	text-decoration: underline;
+	color: deepskyblue;
 }
