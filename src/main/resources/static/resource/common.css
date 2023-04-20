@@ -40,7 +40,8 @@ html>body {
 }
 
 /* 라이브러리 */
-.table-box-type-1 thead th, .table-box-type-1 td {
+.table-box-type-1 thead th, .table-box-type-1 tbody th,
+	.table-box-type-1 td {
 	border: 1px solid black;
 	padding: 10px;
 	text-align: center;

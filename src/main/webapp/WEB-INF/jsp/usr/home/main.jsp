@@ -4,6 +4,6 @@
 <%@ include file="../common/head.jspf"%>
 <hr />
 <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis aperiam qui beatae est expedita quasi
-		repellat nemo aspernatur adipisci ipsum ipsa quos ex debitis sit voluptas odit nulla eius laudantium.</div>
+	repellat nemo aspernatur adipisci ipsum ipsa quos ex debitis sit voluptas odit nulla eius laudantium.</div>
 <div>안녕하세요</div>
 <%@ include file="../common/foot.jspf"%>
