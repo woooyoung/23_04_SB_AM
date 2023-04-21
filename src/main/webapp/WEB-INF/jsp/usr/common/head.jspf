@@ -20,37 +20,46 @@
 <body>
 
 
-		<header>
-				<div class=" h-20 flex container mx-auto text-4xl">
-						<a href="#" class=" flex items-center px-3">
-								<span>로고</span>
+	<header>
+		<div class=" h-20 flex container mx-auto text-4xl">
+			<a href="#" class=" flex items-center px-3">
+				<span>로고</span>
+			</a>
+
+			<div class="flex-grow"></div>
+
+			<ul class="flex">
+				<li class="hover:underline">
+					<a class="h-full px-3 flex items-center" href="/">
+						<span>HOME</span>
+					</a>
+				</li>
+				<li class="hover:underline">
+					<a class="h-full px-3 flex items-center" href="/usr/article/list">
+						<span>LIST</span>
+					</a>
+				</li>
+				<c:if test="${!rq.isLogined() }">
+					<li class="hover:underline">
+						<a class="h-full px-3 flex items-center" href="/usr/member/login">
+							<span>LOGIN</span>
 						</a>
+					</li>
+				</c:if>
+				<c:if test="${rq.isLogined() }">
+					<li class="hover:underline">
+						<a class="h-full px-3 flex items-center" href="/usr/member/doLogout">
+							<span>LOGOUT</span>
+						</a>
+					</li>
+				</c:if>
+			</ul>
+		</div>
+	</header>
 
-						<div class="flex-grow"></div>
-
-						<ul class="flex">
-								<li class="hover:underline">
-										<a class="h-full px-3 flex items-center" href="/">
-												<span>HOME</span>
-										</a>
-								</li>
-								<li class="hover:underline">
-										<a class="h-full px-3 flex items-center" href="/usr/article/list">
-												<span>LIST</span>
-										</a>
-								</li>
-								<li class="hover:underline">
-										<a class="h-full px-3 flex items-center" href="/usr/member/login">
-												<span>LOGIN</span>
-										</a>
-								</li>
-						</ul>
-				</div>
-		</header>
-
-		<section class="my-3 text-2xl">
-				<div class="container mx-auto px-3">
-						<h1>${pageTitle }&nbsp;PAGE</h1>
-				</div>
-		</section>
-		<main>
+	<section class="my-3 text-2xl">
+		<div class="container mx-auto px-3">
+			<h1>${pageTitle }&nbsp;PAGE</h1>
+		</div>
+	</section>
+	<main>

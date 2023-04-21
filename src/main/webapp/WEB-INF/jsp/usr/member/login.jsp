@@ -17,19 +17,19 @@
 						<tr>
 							<th>아이디</th>
 							<td>
-								<input type="text" placeholder="아이디를 입력해주세요" name="loginId" />
+								<input autocomplete="off" type="text" placeholder="아이디를 입력해주세요" name="loginId" />
 							</td>
 						</tr>
 						<tr>
 							<th>비밀번호</th>
 							<td>
-								<input type="text" placeholder="비밀번호를 입력해주세요" name="loginPw" />
+								<input autocomplete="off" type="text" placeholder="비밀번호를 입력해주세요" name="loginPw" />
 							</td>
 						</tr>
 						<tr>
 							<th></th>
 							<td>
-								<input type="submit" value="로그인" />
+								<button type="submit">로그인</button>
 							</td>
 						</tr>
 					</tbody>
