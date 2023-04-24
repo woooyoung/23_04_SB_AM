@@ -92,7 +92,7 @@ public class UsrArticleController {
 
 	@RequestMapping("/usr/article/doWrite")
 	@ResponseBody
-	public String doWrite(HttpServletRequest req, String title, String body) {
+	public String doWrite(HttpServletRequest req, String title, String body, String replaceUri) {
 		Rq rq = (Rq) req.getAttribute("rq");
 
 		if (Ut.empty(title)) {
@@ -106,9 +106,11 @@ public class UsrArticleController {
 
 		int id = (int) writeArticleRd.getData1();
 
-		Article article = articleService.getArticle(id);
+		if (Ut.empty(replaceUri)) {
+			replaceUri = Ut.f("../article/detail?id=%d", id);
+		}
 
-		return rq.jsReplace(Ut.f("%d번 글이 생성되었습니다", id), "/");
+		return rq.jsReplace(Ut.f("%d번 글이 생성되었습니다", id), replaceUri);
 	}
 
 	@RequestMapping("/usr/article/list")
