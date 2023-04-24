@@ -91,8 +91,8 @@ public class ArticleService {
 		return ResultData.from("S-1", "삭제 가능");
 	}
 
-	public List<Article> getForPrintArticles() {
-		return articleRepository.getForPrintArticles();
+	public List<Article> getForPrintArticles(int boardId) {
+		return articleRepository.getForPrintArticles(boardId);
 	}
 
 }

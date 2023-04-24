@@ -124,7 +124,11 @@ public class UsrArticleController {
 
 		Board board = boardService.getBoardById(boardId);
 
-		List<Article> articles = articleService.getForPrintArticles();
+		if (board == null) {
+			return rq.jsHitoryBackOnView("없는 게시판이야");
+		}
+
+		List<Article> articles = articleService.getForPrintArticles(boardId);
 
 		model.addAttribute("board", board);
 		model.addAttribute("articles", articles);
