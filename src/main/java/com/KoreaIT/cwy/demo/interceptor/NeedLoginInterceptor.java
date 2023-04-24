@@ -16,7 +16,6 @@ public class NeedLoginInterceptor implements HandlerInterceptor {
 		Rq rq = (Rq) req.getAttribute("rq");
 
 		if (!rq.isLogined()) {
-//			resp.getWriter().append("<script~~~~)
 
 			rq.printHitoryBackJs("로그인 후 이용해 주세요");
 			return false;
