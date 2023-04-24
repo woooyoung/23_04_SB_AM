@@ -7,7 +7,7 @@
 <section class="mt-8 text-xl">
 	<div class="container mx-auto px-3">
 		<div class="table-box-type-1">
-			<table>
+			<table class="table table-zebra w-full">
 				<colgroup>
 					<col width="70" />
 					<col width="140" />
@@ -25,8 +25,10 @@
 
 				<tbody>
 					<c:forEach var="article" items="${articles }">
-						<tr>
-							<td>${article.id}</td>
+						<tr class="hover">
+							<td>
+								<div class="badge">${article.id}</div>
+							</td>
 							<td>${article.regDate.substring(2,16)}</td>
 							<td>
 								<a class="hover:underline" href="../article/detail?id=${article.id}">${article.title}</a>
