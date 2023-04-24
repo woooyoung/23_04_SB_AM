@@ -23,7 +23,7 @@ public class UsrArticleController {
 	private ArticleService articleService;
 
 	@RequestMapping("/usr/article/modify")
-	public String showModify(HttpServletRequest req, int id, String title, String body) {
+	public String showModify(HttpServletRequest req, Model model, int id) {
 		Rq rq = (Rq) req.getAttribute("rq");
 
 		Article article = articleService.getForPrintArticle(rq.getLoginedMemberId(), id);
@@ -38,14 +38,18 @@ public class UsrArticleController {
 			return rq.jsHitoryBackOnView(actorCanModifyRd.getMsg());
 		}
 
+		model.addAttribute("article", article);
+
 		return "usr/article/modify";
 	}
 
 	@RequestMapping("/usr/article/doModify")
+	@ResponseBody
 	public String doModify(HttpServletRequest req, int id, String title, String body) {
 		Rq rq = (Rq) req.getAttribute("rq");
 
 		Article article = articleService.getArticle(id);
+
 		if (article == null) {
 			return Ut.jsHitoryBack("F-1", Ut.f("%d번 글은 존재하지 않습니다@", id));
 		}
@@ -58,8 +62,7 @@ public class UsrArticleController {
 
 		articleService.modifyArticle(id, title, body);
 
-		return Ut.jsReplace(Ut.f("%d번 글을 수정 했습니다", id), "/");
-
+		return Ut.jsReplace(Ut.f("%d번 글을 수정 했습니다", id), Ut.f("../article/detail?id=%d", id));
 	}
 
 	@RequestMapping("/usr/article/doDelete")
