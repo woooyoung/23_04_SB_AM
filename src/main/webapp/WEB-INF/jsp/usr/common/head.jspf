@@ -41,6 +41,11 @@
 						<span>LIST</span>
 					</a>
 				</li>
+				<li class="hover:underline">
+					<a class="h-full px-3 flex items-center" href="/usr/article/write">
+						<span>WRITE</span>
+					</a>
+				</li>
 				<c:if test="${!rq.isLogined() }">
 					<li class="hover:underline">
 						<a class="h-full px-3 flex items-center" href="/usr/member/login">

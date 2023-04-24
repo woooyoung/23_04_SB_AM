@@ -70,4 +70,12 @@ public class Rq {
 
 	}
 
+	public String jsHitoryBack(String resultCode, String msg) {
+		return Ut.jsHitoryBack(resultCode, msg);
+	}
+
+	public String jsReplace(String resultCode, String msg) {
+		return Ut.jsReplace(resultCode, msg);
+	}
+
 }
