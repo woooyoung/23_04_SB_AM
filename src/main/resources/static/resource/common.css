@@ -55,3 +55,13 @@ html>body {
 	text-decoration: underline;
 	color: deepskyblue;
 }
+
+header>div>ul>li>ul {
+	display: none;
+	position: absolute;
+	background-color: white;
+}
+
+header>div>ul>li:hover>ul {
+	display: block;
+}

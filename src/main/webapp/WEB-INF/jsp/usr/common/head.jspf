@@ -36,10 +36,22 @@
 						<span>HOME</span>
 					</a>
 				</li>
+
 				<li class="hover:underline">
 					<a class="h-full px-3 flex items-center" href="/usr/article/list">
 						<span>LIST</span>
 					</a>
+					<ul class="z-10">
+						<li class="hover:underline">
+							<a href="/usr/article/list?boardId=1">NOTICE</a>
+						</li>
+						<li class="hover:underline">
+							<a href="/usr/article/list?boardId=2">FREE</a>
+						</li>
+						<li class="hover:underline">
+							<a href="/usr/article/list?boardId=3">QnA</a>
+						</li>
+					</ul>
 				</li>
 				<li class="hover:underline">
 					<a class="h-full px-3 flex items-center" href="/usr/article/write">
