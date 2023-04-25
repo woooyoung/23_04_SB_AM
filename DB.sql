@@ -105,19 +105,19 @@ CREATE TABLE board (
 INSERT INTO board
 SET regDate = NOW(),
 updateDate = NOW(),
-`code` = 'notice',
+`code` = 'NOTICE',
 `name` = '공지사항';
 
 INSERT INTO board
 SET regDate = NOW(),
 updateDate = NOW(),
-`code` = 'free',
+`code` = 'FREE',
 `name` = '자유';
 
 INSERT INTO board
 SET regDate = NOW(),
 updateDate = NOW(),
-`code` = 'qna',
+`code` = 'QNA',
 `name` = '질의응답';
 
 ALTER TABLE article ADD COLUMN boardId INT(10) UNSIGNED NOT NULL AFTER `memberId`;
@@ -131,12 +131,27 @@ SET boardId = 2
 WHERE id = 3;
 
 ###################################################################
+
+# 게시물 갯수 늘리기
+INSERT INTO article 
+( 
+    regDate, updateDate, memberId, boardId, title, `body`
+)
+SELECT NOW(), NOW(), FLOOR(RAND() * 2) + 2, FLOOR(RAND() * 2) + 1, CONCAT('제목_',RAND()), CONCAT('내용_',RAND())
+FROM article;
+
+SELECT COUNT(*) FROM article;
+
 DESC article;
 
 SELECT * FROM article;
 SELECT * FROM `member`;
 SELECT * FROM board;
 
+SELECT COUNT(*) AS cnt
+FROM article AS A
+WHERE 1
+AND A.boardId = 1
 
 
 DESC `member`;
