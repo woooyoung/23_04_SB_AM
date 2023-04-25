@@ -10,6 +10,7 @@
 		updateDate =
 		NOW(),
 		memberId = #{memberId},
+		boardId = #{boardId},
 		title =#{title},
 		`body`= #{body}
 	</insert>

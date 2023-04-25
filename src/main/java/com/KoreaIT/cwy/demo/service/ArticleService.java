@@ -20,10 +20,9 @@ public class ArticleService {
 		this.articleRepository = articleRepository;
 	}
 
-	// 서비스 메서드
-	public ResultData<Integer> writeArticle(int memberId, String title, String body) {
+	public ResultData<Integer> writeArticle(int memberId, int boardId, String title, String body) {
 
-		articleRepository.writeArticle(memberId, title, body);
+		articleRepository.writeArticle(memberId, boardId, title, body);
 
 		int id = articleRepository.getLastInsertId();
 
