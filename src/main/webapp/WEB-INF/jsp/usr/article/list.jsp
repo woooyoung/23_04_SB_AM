@@ -44,8 +44,8 @@
 		</div>
 		<div class="pagination flex justify-center mt-3">
 			<div class="btn-group">
-				<c:forEach begin="1" end="20" var="i">
-					<a class="btn ${param.page == i ? 'btn-active' : '' }" href="?page=${i }">${i }</a>
+				<c:forEach begin="1" end="${pagesCount }" var="i">
+					<a class="btn ${page == i ? 'btn-active' : '' }" href="?page=${i }">${i }</a>
 				</c:forEach>
 
 			</div>
