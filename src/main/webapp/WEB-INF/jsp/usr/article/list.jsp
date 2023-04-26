@@ -14,6 +14,7 @@
 					<col width="140" />
 					<col width="140" />
 					<col width="140" />
+					<col width="140" />
 				</colgroup>
 				<thead>
 					<tr>
@@ -21,6 +22,7 @@
 						<th>날짜</th>
 						<th>제목</th>
 						<th>작성자</th>
+						<th>조회수</th>
 					</tr>
 				</thead>
 
@@ -35,6 +37,7 @@
 								<a class="hover:underline" href="../article/detail?id=${article.id}">${article.title}</a>
 							</td>
 							<td>${article.extra__writer}</td>
+							<td>${article.hitCount}</td>
 
 						</tr>
 					</c:forEach>
@@ -64,8 +67,7 @@
 
 				<c:if test="${endPage < pagesCount }">
 					<button class="btn btn-disabled">...</button>
-					<a class="btn"
-						href="${baseUri }&page=${pagesCount}">${pagesCount }</a>
+					<a class="btn" href="${baseUri }&page=${pagesCount}">${pagesCount }</a>
 				</c:if>
 			</div>
 		</div>
