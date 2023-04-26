@@ -29,7 +29,8 @@ public class UsrArticleController {
 
 	@RequestMapping("/usr/article/list")
 	public String showList(Model model, @RequestParam(defaultValue = "1") int boardId,
-			@RequestParam(defaultValue = "1") int page) {
+			@RequestParam(defaultValue = "title,body") String searchKeywordTypeCode,
+			@RequestParam(defaultValue = "") String searchKeyword, @RequestParam(defaultValue = "1") int page) {
 
 		Board board = boardService.getBoardById(boardId);
 
@@ -37,13 +38,9 @@ public class UsrArticleController {
 			return rq.jsHitoryBackOnView("없는 게시판이야");
 		}
 
-		int articlesCount = articleService.getArticlesCount(boardId);
+		int articlesCount = articleService.getArticlesCount(boardId, searchKeywordTypeCode, searchKeyword);
 
 		int itemsInAPage = 10;
-
-		// 한 페이지에 10개씩이야
-		// 글 20개 -> 2
-		// 글 24개 -> 3
 
 		int pagesCount = (int) Math.ceil(articlesCount / (double) itemsInAPage);
 
