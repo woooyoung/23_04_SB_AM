@@ -132,6 +132,19 @@ WHERE id = 3;
 
 ###################################################################
 
+UPDATE article
+SET `body` = '내용4'
+WHERE id= 1;
+
+UPDATE article
+SET `body` = '내용5'
+WHERE id= 2;
+
+UPDATE article
+SET `body` = '내용6'
+WHERE id= 3;
+
+
 # 게시물 갯수 늘리기
 INSERT INTO article 
 ( 
@@ -153,7 +166,14 @@ FROM article AS A
 WHERE 1
 AND A.boardId = 1
 
+SELECT *
+		  FROM article
+		  WHERE boardId = 1
+		  ORDER BY id DESC
+		  LIMIT 0, 10
 
 DESC `member`;
 
 SELECT LAST_INSERT_ID();
+
+SELECT  CONCAT('%' 'abc' '%');
