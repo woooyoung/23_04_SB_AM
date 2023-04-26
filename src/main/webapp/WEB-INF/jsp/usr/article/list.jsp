@@ -44,10 +44,24 @@
 		</div>
 		<div class="pagination flex justify-center mt-3">
 			<div class="btn-group">
-				<c:forEach begin="1" end="${pagesCount }" var="i">
-					<a class="btn ${page == i ? 'btn-active' : '' }" href="?page=${i }">${i }</a>
+
+				<c:set var="paginationLen" value="4" />
+				<c:set var="startPage" value="${page - paginationLen >= 1 ? page - paginationLen : 1}" />
+				<c:set var="endPage" value="${page + paginationLen <= pagesCount ? page + paginationLen : pagesCount}" />
+
+				<c:if test="${startPage > 1 }">
+					<a class="btn" href="?page=1&boardId=${boardId }">1</a>
+					<button class="btn btn-disabled">...</button>
+				</c:if>
+
+				<c:forEach begin="${startPage }" end="${endPage }" var="i">
+					<a class="btn ${page == i ? 'btn-active' : '' }" href="?page=${i }&boardId=${boardId }">${i }</a>
 				</c:forEach>
 
+				<c:if test="${endPage < pagesCount }">
+					<button class="btn btn-disabled">...</button>
+					<a class="btn" href="?page=${pagesCount }&boardId=${boardId }">${pagesCount }</a>
+				</c:if>
 			</div>
 		</div>
 	</div>
