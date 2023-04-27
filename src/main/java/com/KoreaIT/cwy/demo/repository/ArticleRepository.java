@@ -68,11 +68,19 @@ public interface ArticleRepository {
 	public Article getArticle(int id);
 
 	@Select("""
-			SELECT A.*, M.nickname AS extra__writer
+			<script>
+			SELECT A.*, M.nickname AS extra__writer,
+			IFNULL(SUM(RP.point),0) AS extra__sumReactionPoint,
+			IFNULL(SUM(IF(RP.point &gt; 0,RP.point,0)),0) AS extra__goodReactionPoint,
+			IFNULL(SUM(IF(RP.point &lt; 0,RP.point,0)),0) AS extra__badReactionPoint
 			FROM article AS A
 			INNER JOIN `member` AS M
 			ON A.memberId = M.id
+			LEFT JOIN reactionPoint AS RP 
+			ON A.id = RP.relId AND RP.relTypeCode = 'article'
 			WHERE A.id = #{id}
+			GROUP BY A.id
+			</script>
 			""")
 	public Article getForPrintArticle(int id);
 

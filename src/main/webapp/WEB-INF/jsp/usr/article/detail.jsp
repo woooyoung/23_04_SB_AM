@@ -71,6 +71,18 @@
 						</td>
 					</tr>
 					<tr>
+						<th>좋아요</th>
+						<td>${article.extra__goodReactionPoint }</td>
+					</tr>
+					<tr>
+						<th>싫어요</th>
+						<td>${article.extra__badReactionPoint }</td>
+					</tr>
+					<tr>
+						<th>추천 총합</th>
+						<td>${article.extra__sumReactionPoint }</td>
+					</tr>
+					<tr>
 						<th>제목</th>
 						<td>${article.title }</td>
 					</tr>
