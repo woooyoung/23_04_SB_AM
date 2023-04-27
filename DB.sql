@@ -130,6 +130,8 @@ UPDATE article
 SET boardId = 2
 WHERE id = 3;
 
+ALTER TABLE article ADD COLUMN hitCount INT(10) UNSIGNED NOT NULL;
+
 ###################################################################
 
 UPDATE article
