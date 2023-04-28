@@ -30,7 +30,7 @@ public interface ArticleRepository {
 			FROM article AS A
 			INNER JOIN `member` AS M
 			ON A.memberId = M.id
-			LEFT JOIN reactionPoint AS RP 
+			LEFT JOIN reactionPoint AS RP
 			ON A.id = RP.relId AND RP.relTypeCode = 'article'
 			WHERE 1
 			<if test="boardId != 0">
@@ -76,7 +76,7 @@ public interface ArticleRepository {
 			FROM article AS A
 			INNER JOIN `member` AS M
 			ON A.memberId = M.id
-			LEFT JOIN reactionPoint AS RP 
+			LEFT JOIN reactionPoint AS RP
 			ON A.id = RP.relId AND RP.relTypeCode = 'article'
 			WHERE A.id = #{id}
 			GROUP BY A.id
@@ -134,5 +134,16 @@ public interface ArticleRepository {
 			</script>
 			""")
 	public int getArticleHitCount(int id);
+
+	@Select("""
+			<script>
+				SELECT IFNULL(SUM(RP.point),0)
+				FROM reactionPoint AS RP
+				WHERE RP.relTypeCode = 'article'
+				AND RP.relId = #{id}
+				AND RP.memberId = #{actorId}
+			</script>
+			""")
+	public int getSumReactionPointByMemberId(int actorId, int id);
 
 }
