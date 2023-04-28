@@ -80,12 +80,14 @@
 								<div>
 									<span>
 										<span>&nbsp;</span>
-										<a href="/usr/reactionPoint/doGoodReaction?relTypeCode=article&relId=${param.id }&replaceUri=${rq.currentUri}"
+										<a
+											href="/usr/reactionPoint/doGoodReaction?relTypeCode=article&relId=${param.id }&replaceUri=${rq.encodedCurrentUri}"
 											class="btn btn-xs">좋아요 👍</a>
 									</span>
 									<span>
 										<span>&nbsp;</span>
-										<a href="/usr/reactionPoint/doBadReaction?relTypeCode=article&relId=${param.id }&replaceUri=${rq.currentUri}"
+										<a
+											href="/usr/reactionPoint/doBadReaction?relTypeCode=article&relId=${param.id }&replaceUri=${rq.encodedCurrentUri}"
 											class="btn btn-xs">싫어요 👎</a>
 									</span>
 								</div>

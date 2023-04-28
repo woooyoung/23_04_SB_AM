@@ -96,17 +96,20 @@ public class Rq {
 	public String getCurrentUri() {
 		String currentUri = req.getRequestURI();
 		String queryString = req.getQueryString();
-		
+
 		System.out.println(currentUri);
 		System.out.println(queryString);
-		
+
 		if (queryString != null && queryString.length() > 0) {
 			currentUri += "?" + queryString;
 		}
 
 		System.out.println(currentUri);
 		return currentUri;
+	}
 
+	public String getEncodedCurrentUri() {
+		return Ut.getEncodedCurrentUri(getCurrentUri());
 	}
 
 	// Rq 객체 생성 유도

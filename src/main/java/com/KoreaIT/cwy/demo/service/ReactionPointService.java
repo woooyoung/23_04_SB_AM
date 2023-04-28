@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 
 import com.KoreaIT.cwy.demo.repository.ReactionPointRepository;
 import com.KoreaIT.cwy.demo.vo.ResultData;
-import com.KoreaIT.cwy.demo.vo.ResultData;
 
 @Service
 public class ReactionPointService {
