@@ -9,6 +9,7 @@
 	params.id = parseInt('${param.id}');
 </script>
 
+<!-- 조회수 관련 -->
 <script>
 	function ArticleDetail__increaseHitCount() {
 		const localStorageKey = 'article__' + params.id + '__alreadyView';
@@ -34,6 +35,27 @@
 		// 연습코드
 		setTimeout(ArticleDetail__increaseHitCount, 2000);
 	})
+</script>
+
+<script type="text/javascript">
+	let ReplyWrite__submitFormDone = false;
+
+	function ReplyWrite__submitForm(form) {
+		if (ReplyWrite__submitFormDone) {
+			return;
+		}
+		form.body.value = form.body.value.trim();
+
+		if (form.body.value.length < 3) {
+			alert('3글자 이상 입력하세요');
+			form.body.focus();
+			return;
+		}
+
+		ReplyWrite__submitFormDone = true;
+		form.submit();
+
+	}
 </script>
 
 <section class="mt-8 text-xl">
@@ -124,14 +146,7 @@
 							</c:if>
 						</td>
 					</tr>
-					<!-- 					<tr> -->
-					<!-- 						<th>싫어요</th> -->
-					<%-- 						<td>${article.extra__badReactionPoint }</td> --%>
-					<!-- 					</tr> -->
-					<!-- 					<tr> -->
-					<!-- 						<th>추천 총합</th> -->
-					<%-- 						<td>${article.extra__sumReactionPoint }</td> --%>
-					<!-- 					</tr> -->
+
 					<tr>
 						<th>제목</th>
 						<td>${article.title }</td>
@@ -162,7 +177,7 @@
 	<div class="container mx-auto px-3">
 		<div class="table-box-type-1">
 			<c:if test="${rq.logined }">
-				<form action="../reply/doWrite" method="POST">
+				<form action="../reply/doWrite" method="POST" onsubmit="ReplyWrite__submitForm(this); return false;">
 					<input type="hidden" name="relTypeCode" value="article" />
 					<input type="hidden" name="relId" value="${article.id }" />
 					<table>
