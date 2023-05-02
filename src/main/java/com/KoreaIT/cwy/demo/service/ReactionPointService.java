@@ -45,7 +45,11 @@ public class ReactionPointService {
 	}
 
 	public ResultData addBadReactionPoint(int actorId, String relTypeCode, int relId) {
-		reactionPointRepository.addBadReactionPoint(actorId, relTypeCode, relId);
+		int affectedRow = reactionPointRepository.addBadReactionPoint(actorId, relTypeCode, relId);
+
+		if (affectedRow != 1) {
+			return ResultData.from("F-2", "좋아요 실패");
+		}
 
 		switch (relTypeCode) {
 		case "article":
@@ -54,6 +58,30 @@ public class ReactionPointService {
 		}
 
 		return ResultData.from("S-1", "싫어요 처리 됨");
+	}
+
+	public ResultData deleteGoodReactionPoint(int actorId, String relTypeCode, int relId) {
+		reactionPointRepository.deleteGoodReactionPoint(actorId, relTypeCode, relId);
+
+		switch (relTypeCode) {
+		case "article":
+			articleService.decreaseGoodReationPoint(relId);
+			break;
+		}
+
+		return ResultData.from("S-1", "좋아요 취소 처리 됨");
+	}
+
+	public ResultData deleteBadReactionPoint(int actorId, String relTypeCode, int relId) {
+		reactionPointRepository.deleteBadReactionPoint(actorId, relTypeCode, relId);
+
+		switch (relTypeCode) {
+		case "article":
+			articleService.decreaseBadReationPoint(relId);
+			break;
+		}
+
+		return ResultData.from("S-1", "싫어요 취소 처리 됨");
 	}
 
 }

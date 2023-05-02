@@ -107,6 +107,7 @@
 								</div>
 							</c:if>
 
+
 							<c:if test="${actorCanCancelBadReaction }">
 								<div>
 									<span>
@@ -116,7 +117,7 @@
 									<span>
 										<span>&nbsp;</span>
 										<a
-											href="/usr/reactionPoint/doBadCancelReaction?relTypeCode=article&relId=${param.id }&replaceUri=${rq.encodedCurrentUri}"
+											href="/usr/reactionPoint/doCancelBadReaction?relTypeCode=article&relId=${param.id }&replaceUri=${rq.encodedCurrentUri}"
 											class="btn btn-xs">싫어요 👎</a>
 									</span>
 								</div>
