@@ -35,6 +35,7 @@
 					<col width="140" />
 					<col width="140" />
 					<col width="140" />
+					<col width="140" />
 				</colgroup>
 				<thead>
 					<tr>
@@ -45,6 +46,7 @@
 						<th>조회수</th>
 						<th>좋아요</th>
 						<th>싫어요</th>
+						<th>댓글 수</th>
 					</tr>
 				</thead>
 
@@ -62,7 +64,7 @@
 							<td>${article.hitCount}</td>
 							<td>${article.goodReactionPoint}</td>
 							<td>${article.badReactionPoint}</td>
-
+							
 						</tr>
 					</c:forEach>
 				</tbody>

@@ -253,12 +253,21 @@ relTypeCode = 'article',
 relId = 2,
 `body` = '댓글 4';
 
+# 댓글 테이블에 추천 관련 컬럼 추가
+ALTER TABLE reply ADD COLUMN goodReactionPoint INT(10) UNSIGNED NOT NULL DEFAULT 0;
+ALTER TABLE reply ADD COLUMN badReactionPoint INT(10) UNSIGNED NOT NULL DEFAULT 0;
+
 ###################################################################
 SELECT * FROM article;
 SELECT * FROM `member`;
 SELECT * FROM board;
 SELECT * FROM reactionPoint;
 SELECT * FROM `reply`;
+
+SELECT R.*, M.nickname AS extra__writer
+				FROM reply AS R
+				LEFT JOIN `member` AS M
+				ON R.memberId = M.id
 
 SELECT *
 FROM reactionPoint AS RP
