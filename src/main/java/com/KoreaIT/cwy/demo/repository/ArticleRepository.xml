@@ -4,16 +4,7 @@
 <mapper
 	namespace="com.KoreaIT.cwy.demo.repository.ArticleRepository">
 
-	<insert id="writeArticle">
-		INSERT INTO article
-		SET regDate = NOW(),
-		updateDate =
-		NOW(),
-		memberId = #{memberId},
-		boardId = #{boardId},
-		title =#{title},
-		`body`= #{body}
-	</insert>
+
 
 
 	<delete id="deleteArticle">

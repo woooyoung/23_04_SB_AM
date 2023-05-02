@@ -158,6 +158,46 @@
 	</div>
 </section>
 
+<section class="mt-8 text-xl">
+	<div class="container mx-auto px-3">
+		<div class="table-box-type-1">
+			<c:if test="${rq.logined }">
+				<form action="../reply/doWrite" method="POST">
+					<input type="hidden" name="relTypeCode" value="article" />
+					<input type="hidden" name="relId" value="${article.id }" />
+					<table>
+						<colgroup>
+							<col width="200" />
+						</colgroup>
+
+						<tbody>
+							<tr>
+								<th>댓글</th>
+								<td>
+									<textarea class="input input-bordered w-full max-w-xs" type="text" name="body" placeholder="내용을 입력해주세요" /></textarea>
+								</td>
+							</tr>
+							<tr>
+								<th></th>
+								<td>
+									<button type="submit" value="작성" />
+									댓글 작성
+									</button>
+								</td>
+							</tr>
+						</tbody>
+
+					</table>
+				</form>
+			</c:if>
+			<c:if test="${rq.notLogined }">
+				<a class="btn-text-link btn btn-active btn-ghost" href="/usr/member/login">로그인</a> 후 이용해줘
+			</c:if>
+		</div>
+
+	</div>
+</section>
+
 
 
 <%@ include file="../common/foot.jspf"%>

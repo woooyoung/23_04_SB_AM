@@ -118,4 +118,8 @@ public class Rq {
 
 	}
 
+	public boolean isNotLogined() {
+		return !isLogined;
+	}
+
 }
