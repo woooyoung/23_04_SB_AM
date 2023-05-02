@@ -48,7 +48,7 @@ public class ReactionPointService {
 		int affectedRow = reactionPointRepository.addBadReactionPoint(actorId, relTypeCode, relId);
 
 		if (affectedRow != 1) {
-			return ResultData.from("F-2", "좋아요 실패");
+			return ResultData.from("F-2", "싫어요 실패");
 		}
 
 		switch (relTypeCode) {
