@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="pageTitle" value="MEMBER MYPAGE" />
 <%@ include file="../common/head.jspf"%>
+<%@ page import="com.KoreaIT.cwy.demo.util.Ut"%>
 <hr />
 
 <section class="mt-8 text-xl">
@@ -40,7 +41,8 @@
 					<tr>
 						<th></th>
 						<td>
-							<a href="../member/checkPw" class="btn btn-active btn-ghost">회원정보 수정</a>
+							<a href="../member/checkPw?replaceUri=${Ut.getEncodedUri('../member/modify') }" class="btn btn-active btn-ghost">회원정보
+								수정</a>
 						</td>
 					</tr>
 				</tbody>
