@@ -39,7 +39,7 @@ public interface ReplyRepository {
 				ON R.memberId = M.id
 				WHERE R.relTypeCode = #{relTypeCode}
 				AND R.relId = #{relId}
-				ORDER BY R.id DESC
+				ORDER BY R.id ASC
 			""")
 	List<Reply> getForPrintReplies(int actorId, String relTypeCode, int relId);
 
