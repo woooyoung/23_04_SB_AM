@@ -79,4 +79,11 @@ public class ReplyService {
 		return ResultData.from("S-1", Ut.f("%d번 댓글을 삭제했습니다", id));
 	}
 
+	public Reply getForPrintReply(int actorId, int id) {
+		Reply reply = replyRepository.getForPrintReply(id);
+
+		controlForPrintData(actorId, reply);
+		return reply;
+	}
+
 }

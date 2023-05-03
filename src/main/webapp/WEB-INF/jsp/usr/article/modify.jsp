@@ -4,10 +4,32 @@
 <%@ include file="../common/head.jspf"%>
 <hr />
 
+<!-- Article modify 관련 -->
+<script type="text/javascript">
+	let ArticleModify__submitFormDone = false;
+
+	function ArticleModify__submit(form) {
+		if (ArticleModify__submitFormDone) {
+			return;
+		}
+		form.body.value = form.body.value.trim();
+
+		if (form.body.value.length == 0) {
+			alert('내용을 입력해주세요');
+			form.body.focus();
+			return;
+		}
+
+		ArticleModify__submitFormDone = true;
+		form.submit();
+
+	}
+</script>
+
 <section class="mt-8 text-xl">
 	<div class="container mx-auto px-3">
 		<div class="table-box-type-1">
-			<form action="../article/doModify" method="POST">
+			<form action="../article/doModify" method="POST" onsubmit="ArticleModify__submit(this); return false;">
 				<input type="hidden" name="id" value="${article.id }" />
 				<table>
 					<colgroup>

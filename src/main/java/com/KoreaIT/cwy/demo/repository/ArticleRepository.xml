@@ -5,23 +5,13 @@
 	namespace="com.KoreaIT.cwy.demo.repository.ArticleRepository">
 
 
-
-
 	<delete id="deleteArticle">
 		DELETE FROM
 		article
 		WHERE id = #{id}
 	</delete>
 
-	<update id="modifyArticle">
-		UPDATE article
-		<set>
-			<if test="title != null and title != ''">title = #{title},</if>
-			<if test="body != null and body != ''">`body` = #{body},</if>
-			updateDate= NOW()
-		</set>
-		WHERE id = #{id}
-	</update>
+
 
 	<select id="getLastInsertId" resultType="int">
 		SELECT LAST_INSERT_ID()

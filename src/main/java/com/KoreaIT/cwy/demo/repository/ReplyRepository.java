@@ -57,4 +57,13 @@ public interface ReplyRepository {
 			""")
 	void deleteReply(int id);
 
+	@Select("""
+				SELECT R.*, M.nickname AS extra__writer
+				FROM reply AS R
+				INNER JOIN `member` AS M
+				ON R.memberId = M.id
+				WHERE R.id = #{id}
+			""")
+	Reply getForPrintReply(int id);
+
 }
