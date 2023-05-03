@@ -99,25 +99,33 @@ public class UsrReplyController {
 		return "usr/reply/modify";
 	}
 
-//	@RequestMapping("/usr/article/doModify")
-//	@ResponseBody
-//	public String doModify(int id, String title, String body) {
-//
-//		Article article = articleService.getArticle(id);
-//
-//		if (article == null) {
-//			return rq.jsHitoryBack("F-1", Ut.f("%d번 글은 존재하지 않습니다@", id));
-//		}
-//
-//		ResultData actorCanModifyRd = articleService.actorCanModify(rq.getLoginedMemberId(), article);
-//
-//		if (actorCanModifyRd.isFail()) {
-//			return rq.jsHitoryBack(actorCanModifyRd.getResultCode(), actorCanModifyRd.getMsg());
-//		}
-//
-//		articleService.modifyArticle(id, title, body);
-//
-//		return rq.jsReplace(Ut.f("%d번 글을 수정 했습니다", id), Ut.f("../article/detail?id=%d", id));
-//	}
+	@RequestMapping("/usr/reply/doModify")
+	@ResponseBody
+	public String doModify(int id, String body, String replaceUri) {
+
+		Reply reply = replyService.getReply(id);
+
+		if (reply == null) {
+			return rq.jsHitoryBack("F-1", Ut.f("%d번 댓글은 존재하지 않습니다", id));
+		}
+
+		ResultData actorCanModifyRd = replyService.actorCanModify(rq.getLoginedMemberId(), reply);
+
+		if (actorCanModifyRd.isFail()) {
+			return rq.jsHitoryBack(actorCanModifyRd.getResultCode(), actorCanModifyRd.getMsg());
+		}
+
+		ResultData modifyReplyRd = replyService.modifyReply(id, body);
+
+		if (Ut.empty(replaceUri)) {
+			switch (reply.getRelTypeCode()) {
+			case "article":
+				replaceUri = Ut.f("../article/detail?id=%d", reply.getRelId());
+				break;
+			}
+		}
+
+		return rq.jsReplace(modifyReplyRd.getMsg(), replaceUri);
+	}
 
 }

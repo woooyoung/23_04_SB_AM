@@ -30,7 +30,7 @@
 	<div class="container mx-auto px-3">
 		<div class="table-box-type-1">
 			<form action="../reply/doModify" method="POST" onsubmit="ReplyModify__submit(this); return false;">
-				<input type="hidden" name="id" value="${article.id }" />
+				<input type="hidden" name="id" value="${reply.id }" />
 				<table>
 					<colgroup>
 						<col width="200" />
@@ -41,6 +41,12 @@
 							<th>게시물 번호</th>
 							<td>
 								<div class="badge">${article.id}</div>
+							</td>
+						</tr>
+						<tr>
+							<th>댓글 번호</th>
+							<td>
+								<div class="badge">${reply.id}</div>
 							</td>
 						</tr>
 						<tr>
