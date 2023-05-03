@@ -218,6 +218,39 @@
 <section class="mt-5">
 	<div class="container mx-auto px-3">
 		<h1 class="text-3xl">댓글 리스트(${repliesCount })</h1>
+		<table class="table table-zebra w-full">
+			<colgroup>
+				<col width="70" />
+				<col width="100" />
+				<col width="100" />
+				<col width="50" />
+				<col width="140" />
+			</colgroup>
+			<thead>
+				<tr>
+					<th>번호</th>
+					<th>날짜</th>
+					<th>작성자</th>
+					<th>추천</th>
+					<th>내용</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<c:forEach var="reply" items="${replies }">
+					<tr class="hover">
+						<td>
+							<div class="badge">${reply.id}</div>
+						</td>
+						<td>${reply.getForPrintRegDateType1()}</td>
+						<td>${reply.extra__writer}</td>
+						<td>${reply.goodReactionPoint}</td>
+						<td align="left">${reply.body}</td>
+					</tr>
+				</c:forEach>
+			</tbody>
+
+		</table>
 	</div>
 </section>
 

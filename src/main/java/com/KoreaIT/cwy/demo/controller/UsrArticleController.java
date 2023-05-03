@@ -54,12 +54,6 @@ public class UsrArticleController {
 		List<Article> articles = articleService.getForPrintArticles(boardId, itemsInAPage, page, searchKeywordTypeCode,
 				searchKeyword);
 
-//		List<Reply> replies = replyService.getForPrintReplies(rq.getLoginedMemberId(), "article", id);
-//
-//		int repliesCount = replies.size();
-//
-//		model.addAttribute("repliesCount", repliesCount);
-
 		model.addAttribute("searchKeywordTypeCode", searchKeywordTypeCode);
 		model.addAttribute("searchKeyword", searchKeyword);
 		model.addAttribute("board", board);
@@ -172,6 +166,7 @@ public class UsrArticleController {
 		int repliesCount = replies.size();
 
 		model.addAttribute("repliesCount", repliesCount);
+		model.addAttribute("replies", replies);
 		model.addAttribute("article", article);
 		model.addAttribute("actorCanMakeReactionRd", actorCanMakeReactionRd);
 		model.addAttribute("actorCanMakeReaction", actorCanMakeReactionRd.isSuccess());
