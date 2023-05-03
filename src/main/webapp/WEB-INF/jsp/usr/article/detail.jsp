@@ -209,7 +209,7 @@
 				</form>
 			</c:if>
 			<c:if test="${rq.notLogined }">
-				<a class="btn-text-link btn btn-active btn-ghost" href="/usr/member/login">로그인</a> 후 이용해줘
+				<a class="btn-text-link btn btn-active btn-ghost" href="/usr/member/login">로그인</a> 하고 해라
 			</c:if>
 		</div>
 
