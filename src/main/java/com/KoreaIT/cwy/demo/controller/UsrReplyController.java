@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.KoreaIT.cwy.demo.service.ReplyService;
 import com.KoreaIT.cwy.demo.util.Ut;
+import com.KoreaIT.cwy.demo.vo.Reply;
 import com.KoreaIT.cwy.demo.vo.ResultData;
 import com.KoreaIT.cwy.demo.vo.Rq;
 
@@ -41,6 +42,33 @@ public class UsrReplyController {
 		}
 
 		return rq.jsReplace(writeReplyRd.getMsg(), replaceUri);
+	}
+
+	@RequestMapping("/usr/reply/doDelete")
+	@ResponseBody
+	public String doDelete(int id, String replaceUri) {
+
+		Reply reply = replyService.getReply(id);
+
+		if (reply == null) {
+			return Ut.jsHitoryBack("F-1", Ut.f("%d번 댓글은 존재하지 않습니다", id));
+		}
+
+		if (reply.getMemberId() != rq.getLoginedMemberId()) {
+			return Ut.jsHitoryBack("F-2", Ut.f("%d번 댓글에 대한 권한이 없습니다", id));
+		}
+
+		ResultData deleteReplyRd = replyService.deleteReply(id);
+
+		if (Ut.empty(replaceUri)) {
+			switch (reply.getRelTypeCode()) {
+			case "article":
+				replaceUri = Ut.f("../article/detail?id=%d", reply.getRelId());
+				break;
+			}
+		}
+
+		return Ut.jsReplace(deleteReplyRd.getMsg(), replaceUri);
 	}
 
 }
