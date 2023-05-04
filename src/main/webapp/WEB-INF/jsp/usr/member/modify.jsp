@@ -42,7 +42,7 @@
 		}
 
 		if (form.nickname.value.length == 0) {
-			alert('이름 써라');
+			alert('nickname 써라');
 			form.nickname.focus();
 		}
 
