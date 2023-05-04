@@ -1,6 +1,7 @@
 package com.KoreaIT.cwy.demo.vo;
 
 import java.io.IOException;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -29,11 +30,15 @@ public class Rq {
 	private HttpServletResponse resp;
 	private HttpSession session;
 
+	private Map<String, String> paramMap;
+
 	public Rq(HttpServletRequest req, HttpServletResponse resp, MemberService memberService) {
 		this.req = req;
 		this.resp = resp;
 
 		this.session = req.getSession();
+
+		paramMap = Ut.getParamMap(req);
 
 		boolean isLogined = false;
 		int loginedMemberId = 0;
@@ -132,6 +137,17 @@ public class Rq {
 	}
 
 	private String getAfterLoginUri() {
+//		로그인 후 접근 불가 페이지
+
+		String requestUri = req.getRequestURI();
+
+		switch (requestUri) {
+		case "/usr/member/login":
+		case "/usr/member/join":
+			return Ut.getEncodedUri(paramMap.get("afterLoginUri"));
+
+		}
+
 		return getEncodedCurrentUri();
 	}
 
