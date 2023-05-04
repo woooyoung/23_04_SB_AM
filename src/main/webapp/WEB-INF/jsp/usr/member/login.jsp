@@ -8,6 +8,7 @@
 	<div class="container mx-auto px-3">
 		<div class="table-box-type-1">
 			<form action="../member/doLogin" method="POST">
+				<input type="hidden" name="afterLoginUri" value="${param.afterLoginUri }" />
 				<table border="1">
 					<colgroup>
 						<col width="200" />
