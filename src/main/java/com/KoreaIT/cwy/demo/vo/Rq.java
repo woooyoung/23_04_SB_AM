@@ -126,4 +126,10 @@ public class Rq {
 		System.out.println("===========================run A");
 	}
 
+	public void jsprintReplace(String msg, String replaceUri) {
+		resp.setContentType("text/html; charset=UTF-8");
+		print(Ut.jsReplace(msg, replaceUri));
+
+	}
+
 }
