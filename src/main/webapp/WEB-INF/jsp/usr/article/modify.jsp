@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="pageTitle" value="ARTICLE MODIFY" />
 <%@ include file="../common/head.jspf"%>
+<%@ include file="../common/toastUiEditorLib.jspf"%>
 <hr />
 
 <!-- Article modify 관련 -->
@@ -12,13 +13,24 @@
 		if (ArticleModify__submitFormDone) {
 			return;
 		}
-		form.body.value = form.body.value.trim();
 
-		if (form.body.value.length == 0) {
-			alert('내용을 입력해주세요');
-			form.body.focus();
+		form.title.value = form.title.value.trim();
+		if (form.title.value == 0) {
+			alert('제목을 입력해주세요');
 			return;
 		}
+
+		const editor = $(form).find('.toast-ui-editor').data(
+				'data-toast-editor');
+		const markdown = editor.getMarkdown().trim();
+
+		if (markdown.length == 0) {
+			alert('내용 써라');
+			editor.focus();
+			return;
+		}
+
+		form.body.value = markdown;
 
 		ArticleModify__submitFormDone = true;
 		form.submit();
@@ -30,6 +42,7 @@
 	<div class="container mx-auto px-3">
 		<div class="table-box-type-1">
 			<form action="../article/doModify" method="POST" onsubmit="ArticleModify__submit(this); return false;">
+				<input type="hidden" name="body">
 				<input type="hidden" name="id" value="${article.id }" />
 				<table>
 					<colgroup>
@@ -65,7 +78,11 @@
 						<tr>
 							<th>내용</th>
 							<td>
-								<textarea class="input input-bordered w-full max-w-xs" type="text" name="body" placeholder="내용을 입력해주세요" />${article.body }</textarea>
+								<%-- 								<textarea class="input input-bordered w-full max-w-xs" type="text" name="body" placeholder="내용을 입력해주세요" />${article.body }</textarea> --%>
+								<div class="toast-ui-editor">
+									<script type="text/x-template">${article.body }
+      </script>
+								</div>
 							</td>
 						</tr>
 						<tr>
