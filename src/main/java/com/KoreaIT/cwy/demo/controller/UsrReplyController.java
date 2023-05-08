@@ -29,13 +29,13 @@ public class UsrReplyController {
 	public String doWrite(String relTypeCode, int relId, String body, String replaceUri) {
 
 		if (Ut.empty(relTypeCode)) {
-			return rq.jsHitoryBack("F-1", "relTypeCode 을(를) 입력해주세요");
+			return rq.jsHistoryBack("F-1", "relTypeCode 을(를) 입력해주세요");
 		}
 		if (Ut.empty(relId)) {
-			return rq.jsHitoryBack("F-2", "relId 을(를) 입력해주세요");
+			return rq.jsHistoryBack("F-2", "relId 을(를) 입력해주세요");
 		}
 		if (Ut.empty(body)) {
-			return rq.jsHitoryBack("F-3", "body 을(를) 입력해주세요");
+			return rq.jsHistoryBack("F-3", "body 을(를) 입력해주세요");
 		}
 
 		ResultData<Integer> writeReplyRd = replyService.writeReply(rq.getLoginedMemberId(), relTypeCode, relId, body);
@@ -56,11 +56,11 @@ public class UsrReplyController {
 		Reply reply = replyService.getReply(id);
 
 		if (reply == null) {
-			return Ut.jsHitoryBack("F-1", Ut.f("%d번 댓글은 존재하지 않습니다", id));
+			return Ut.jsHistoryBack("F-1", Ut.f("%d번 댓글은 존재하지 않습니다", id));
 		}
 
 		if (reply.getMemberId() != rq.getLoginedMemberId()) {
-			return Ut.jsHitoryBack("F-2", Ut.f("%d번 댓글에 대한 권한이 없습니다", id));
+			return Ut.jsHistoryBack("F-2", Ut.f("%d번 댓글에 대한 권한이 없습니다", id));
 		}
 
 		ResultData deleteReplyRd = replyService.deleteReply(id);
@@ -106,13 +106,13 @@ public class UsrReplyController {
 		Reply reply = replyService.getReply(id);
 
 		if (reply == null) {
-			return rq.jsHitoryBack("F-1", Ut.f("%d번 댓글은 존재하지 않습니다", id));
+			return rq.jsHistoryBack("F-1", Ut.f("%d번 댓글은 존재하지 않습니다", id));
 		}
 
 		ResultData actorCanModifyRd = replyService.actorCanModify(rq.getLoginedMemberId(), reply);
 
 		if (actorCanModifyRd.isFail()) {
-			return rq.jsHitoryBack(actorCanModifyRd.getResultCode(), actorCanModifyRd.getMsg());
+			return rq.jsHistoryBack(actorCanModifyRd.getResultCode(), actorCanModifyRd.getMsg());
 		}
 
 		ResultData modifyReplyRd = replyService.modifyReply(id, body);

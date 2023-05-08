@@ -37,7 +37,7 @@ public class Ut {
 		return String.format(format, args);
 	}
 
-	public static String jsHitoryBack(String resultCode, String msg) {
+	public static String jsHistoryBack(String resultCode, String msg) {
 
 		if (msg == null) {
 			msg = "";
