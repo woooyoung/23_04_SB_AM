@@ -6,8 +6,6 @@
 
 <div id="map" style="width: 100%; height: 350px;"></div>
 
-
-
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9cb7a158e6102f18491a3f7057d13c6a"></script>
 <script>
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
