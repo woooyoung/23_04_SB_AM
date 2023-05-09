@@ -71,6 +71,10 @@
 			validLoginId = '';
 			return;
 		}
+		
+		if(validLoginId == form.loginId.value){
+			return;
+		}
 
 		$.get('../member/getLoginIdDup', {
 			isAjax : 'Y',
