@@ -37,7 +37,7 @@ CREATE TABLE `member`(
     regDate DATETIME NOT NULL,
     updateDate DATETIME NOT NULL,
     loginId CHAR(20) NOT NULL,
-    loginPw CHAR(60) NOT NULL,
+    loginPw CHAR(100) NOT NULL,
     `authLevel` SMALLINT(2) UNSIGNED DEFAULT 3 COMMENT '권한 레벨 (3=일반,7=관리자)',
     `name` CHAR(20) NOT NULL,
     nickname CHAR(20) NOT NULL,
@@ -260,6 +260,10 @@ ALTER TABLE reply ADD COLUMN badReactionPoint INT(10) UNSIGNED NOT NULL DEFAULT 
 # 댓글 테이블에 인덱스 추가
 ALTER TABLE `SB_AM_04`.`reply` ADD KEY `relTypeCodeId` (`relTypeCode` , `relId`);
 
+# 기존의 회원 비번을 암호화
+UPDATE `member`
+SET loginPw = SHA2(loginPw,256);
+
 
 ###################################################################
 SELECT * FROM article;
@@ -267,6 +271,8 @@ SELECT * FROM `member`;
 SELECT * FROM board;
 SELECT * FROM reactionPoint;
 SELECT * FROM `reply`;
+
+SELECT SHA2('hello',256);
 
 SELECT R.*, M.nickname AS extra__writer
 				FROM reply AS R

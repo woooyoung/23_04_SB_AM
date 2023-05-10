@@ -49,24 +49,24 @@ public class UsrMemberController {
 	public String doJoin(String loginId, String loginPw, String name, String nickname, String cellphoneNum,
 			String email, @RequestParam(defaultValue = "/") String afterLoginUri) {
 
-		if (Ut.empty(loginId)) {
-			return rq.jsHistoryBack("F-1", "아이디를 입력해주세요");
-		}
-		if (Ut.empty(loginPw)) {
-			return rq.jsHistoryBack("F-2", "비밀번호를 입력해주세요");
-		}
-		if (Ut.empty(name)) {
-			return rq.jsHistoryBack("F-3", "이름을 입력해주세요");
-		}
-		if (Ut.empty(nickname)) {
-			return rq.jsHistoryBack("F-4", "닉네임을 입력해주세요");
-		}
-		if (Ut.empty(cellphoneNum)) {
-			return rq.jsHistoryBack("F-5", "전화번호를 입력해주세요");
-		}
-		if (Ut.empty(email)) {
-			return rq.jsHistoryBack("F-6", "이메일을 입력해주세요");
-		}
+//		if (Ut.empty(loginId)) {
+//			return rq.jsHistoryBack("F-1", "아이디를 입력해주세요");
+//		}
+//		if (Ut.empty(loginPw)) {
+//			return rq.jsHistoryBack("F-2", "비밀번호를 입력해주세요");
+//		}
+//		if (Ut.empty(name)) {
+//			return rq.jsHistoryBack("F-3", "이름을 입력해주세요");
+//		}
+//		if (Ut.empty(nickname)) {
+//			return rq.jsHistoryBack("F-4", "닉네임을 입력해주세요");
+//		}
+//		if (Ut.empty(cellphoneNum)) {
+//			return rq.jsHistoryBack("F-5", "전화번호를 입력해주세요");
+//		}
+//		if (Ut.empty(email)) {
+//			return rq.jsHistoryBack("F-6", "이메일을 입력해주세요");
+//		}
 
 		ResultData<Integer> joinRd = memberService.join(loginId, loginPw, name, nickname, cellphoneNum, email);
 
@@ -107,8 +107,10 @@ public class UsrMemberController {
 			return Ut.jsHistoryBack("F-3", Ut.f("%s는 존재하지 않는 아이디입니다", loginId));
 		}
 
-		if (member.getLoginPw().equals(loginPw) == false) {
-			return Ut.jsHistoryBack("F-4", Ut.f("비밀번호가 일치하지 않습니다"));
+		System.out.println(Ut.sha256(loginPw));
+
+		if (member.getLoginPw().equals(Ut.sha256(loginPw)) == false) {
+			return Ut.jsHistoryBack("F-4", Ut.f("비밀번호가 일치하지 않습니다!!!!!"));
 		}
 
 		rq.login(member);
@@ -144,13 +146,11 @@ public class UsrMemberController {
 	@RequestMapping("/usr/member/doCheckPw")
 	@ResponseBody
 	public String doCheckPw(String loginPw, String replaceUri) {
-		System.out.println("========================================" + loginPw);
-		System.out.println("========================================" + replaceUri);
 		if (Ut.empty(loginPw)) {
 			return rq.jsHitoryBackOnView("비밀번호 입력해");
 		}
 
-		if (rq.getLoginedMember().getLoginPw().equals(loginPw) == false) {
+		if (rq.getLoginedMember().getLoginPw().equals(Ut.sha256(loginPw)) == false) {
 			return rq.jsHistoryBack("", "비밀번호 틀림");
 		}
 
@@ -165,23 +165,28 @@ public class UsrMemberController {
 
 	@RequestMapping("/usr/member/doModify")
 	@ResponseBody
-	public String doModify(String loginPw, String name, String nickname, String cellphoneNum, String email) {
+	public String doModify(String loginId, String loginPw, String name, String nickname, String cellphoneNum,
+			String email) {
+
+		Member member = memberService.getMemberByLoginId(loginId);
 
 		if (Ut.empty(loginPw)) {
-			loginPw = null;
+			loginPw = member.getLoginPw();
+		} else {
+			loginPw = Ut.sha256(loginPw);
 		}
-		if (Ut.empty(name)) {
-			return rq.jsHitoryBackOnView("name 입력해");
-		}
-		if (Ut.empty(nickname)) {
-			return rq.jsHitoryBackOnView("nickname 입력해");
-		}
-		if (Ut.empty(cellphoneNum)) {
-			return rq.jsHitoryBackOnView("cellphoneNum 입력해");
-		}
-		if (Ut.empty(email)) {
-			return rq.jsHitoryBackOnView("email 입력해");
-		}
+//		if (Ut.empty(name)) {
+//			return rq.jsHitoryBackOnView("name 입력해");
+//		}
+//		if (Ut.empty(nickname)) {
+//			return rq.jsHitoryBackOnView("nickname 입력해");
+//		}
+//		if (Ut.empty(cellphoneNum)) {
+//			return rq.jsHitoryBackOnView("cellphoneNum 입력해");
+//		}
+//		if (Ut.empty(email)) {
+//			return rq.jsHitoryBackOnView("email 입력해");
+//		}
 
 		ResultData modifyRd = memberService.modify(rq.getLoginedMemberId(), loginPw, name, nickname, cellphoneNum,
 				email);
