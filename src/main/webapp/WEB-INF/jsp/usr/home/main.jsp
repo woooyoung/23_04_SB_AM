@@ -6,7 +6,7 @@
 <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis aperiam qui beatae est expedita quasi
 	repellat nemo aspernatur adipisci ipsum ipsa quos ex debitis sit voluptas odit nulla eius laudantium.</div>
 <div>안녕하세요</div>
-<div class="popup text-2xl">Popup Test</div>
+<div class="popup text-2xl inline">Popup Test</div>
 <div class="layer-bg"></div>
 <div class="layer">
 	<div class="flex justify-between">

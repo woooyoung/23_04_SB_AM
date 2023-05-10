@@ -2,20 +2,60 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
-<head>
+<head data-theme="light">
 <meta charset="UTF-8">
 <title>${pageTitle }</title>
 <!-- 제이쿼리 불러오기 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
 <!-- 테일윈드 불러오기 -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.7/tailwind.min.css" />
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.7/tailwind.min.css" /> -->
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2/dist/tailwind.min.css" rel="stylesheet" type="text/css" />
 
 <!-- 데이지 UI -->
 <link href="https://cdn.jsdelivr.net/npm/daisyui@2.51.5/dist/full.css" rel="stylesheet" type="text/css" />
 
 <!-- 폰트어썸 불러오기 -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
+
+<script>
+function Theme__toggle() {
+	const theme = localStorage.getItem("theme") ?? "light";
+
+	if( theme == 'light'){
+		localStorage.setItem("theme","dark");
+		//Theme__applyTo('dark');
+	}
+	else {
+	    localStorage.setItem("theme", "light");
+	    //Theme__applyTo('light');
+	}
+
+	function Theme__applyTo(themeName) {
+		  $('html').attr('data-theme', themeName);
+	}
+
+
+	function Theme__init() {
+	  const theme = localStorage.getItem("theme") ?? "light";
+	  Theme__applyTo(theme);
+	}
+
+	//Theme__init();
+	location.reload();
+
+}
+function Theme__applyTo(themeName) {
+	  $('html').attr('data-theme', themeName);
+	}
+
+	function Theme__init() {
+	  const theme = localStorage.getItem("theme") ?? "light";
+	  Theme__applyTo(theme);
+	}
+
+	Theme__init();
+</script>
 
 <link rel="stylesheet" href="/resource/common.css" />
 <link rel="shortcut icon" href="/resource/favicon.ico" />
@@ -33,6 +73,12 @@
 			<div class="flex-grow"></div>
 
 			<ul class="flex">
+				<li class="">
+					<a class="h-full px-3 flex items-center btn-theme-toggle" href="javascript:Theme__toggle();">
+						<span>🌞</span>
+						<span>🌚</span>
+					</a>
+				</li>
 				<li class="hover:underline">
 					<a class="h-full px-3 flex items-center" href="/">
 						<span>HOME</span>
@@ -43,7 +89,7 @@
 					<a class="h-full px-3 flex items-center" href="/usr/article/list">
 						<span>LIST</span>
 					</a>
-					<ul class="z-10">
+					<ul class="z-10 ">
 						<li class="hover:underline">
 							<a href="/usr/article/list?boardId=1">NOTICE</a>
 						</li>
