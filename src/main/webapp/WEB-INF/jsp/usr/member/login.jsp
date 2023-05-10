@@ -35,6 +35,13 @@
 								<button type="submit">로그인</button>
 							</td>
 						</tr>
+						<tr>
+							<th></th>
+							<td>
+								<a class="btn btn-active btn-ghost" href="${rq.findLoginIdUri }">아이디 찾기</a>
+								<a class="btn btn-ghost btn-active" href="${rq.findLoginPwUri }">비밀번호찾기</a>
+							</td>
+						</tr>
 					</tbody>
 				</table>
 			</form>
@@ -42,13 +49,7 @@
 		<div class="btns">
 			<button class="btn-text-link btn btn-active btn-ghost" type="button" onclick="history.back();">뒤로가기</button>
 
-			<c:if test="${article.actorCanModify }">
-				<a class="btn-text-link btn btn-active btn-ghost" href="../article/modify?id=${article.id }">수정</a>
-			</c:if>
-			<c:if test="${article.actorCanDelete }">
-				<a class="btn-text-link btn btn-active btn-ghost" onclick="if(confirm('정말 삭제하시겠습니까?')==false) return false;"
-					href="../article/doDelete?id=${article.id }">삭제</a>
-			</c:if>
+
 		</div>
 	</div>
 </section>

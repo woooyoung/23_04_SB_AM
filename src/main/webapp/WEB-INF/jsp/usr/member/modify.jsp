@@ -39,21 +39,25 @@
 		if (form.name.value.length == 0) {
 			alert('이름 써라');
 			form.name.focus();
+			return;
 		}
 
 		if (form.nickname.value.length == 0) {
 			alert('nickname 써라');
 			form.nickname.focus();
+			return;
 		}
 
 		if (form.cellphoneNum.value.length == 0) {
 			alert('cellphoneNum 써라');
 			form.cellphoneNum.focus();
+			return;
 		}
 
 		if (form.email.value.length == 0) {
 			alert('email 써라');
 			form.email.focus();
+			return;
 		}
 
 		MemberModify__submitFormDone = true;
