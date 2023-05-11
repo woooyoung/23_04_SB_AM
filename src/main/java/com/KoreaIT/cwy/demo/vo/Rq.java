@@ -20,6 +20,8 @@ import lombok.Getter;
 @Scope(value = "request", proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class Rq {
 	@Getter
+	boolean isAjax;
+	@Getter
 	private boolean isLogined;
 	@Getter
 	private int loginedMemberId;
@@ -55,6 +57,24 @@ public class Rq {
 		this.loginedMember = loginedMember;
 
 		this.req.setAttribute("rq", this);
+
+		String requestUri = req.getRequestURI();
+
+		boolean isAjax = requestUri.endsWith("Ajax");
+
+		if (isAjax == false) {
+			if (paramMap.containsKey("ajax") && paramMap.get("ajax").equals("Y")) {
+				isAjax = true;
+			} else if (paramMap.containsKey("isAjax") && paramMap.get("isAjax").equals("Y")) {
+				isAjax = true;
+			}
+		}
+		if (isAjax == false) {
+			if (requestUri.contains("/get")) {
+				isAjax = true;
+			}
+		}
+		this.isAjax = isAjax;
 
 	}
 
@@ -133,11 +153,11 @@ public class Rq {
 	}
 
 	public String getJoinUri() {
-		return "../member/join?afterLoginUri=" + getAfterLoginUri();
+		return "/usr/member/join?afterLoginUri=" + getAfterLoginUri();
 	}
 
 	public String getLoginUri() {
-		return "../member/login?afterLoginUri=" + getAfterLoginUri();
+		return "/usr/member/login?afterLoginUri=" + getAfterLoginUri();
 	}
 
 	public String getLogoutUri() {
@@ -145,6 +165,8 @@ public class Rq {
 
 		switch (requestUri) {
 		case "/usr/article/write":
+			return "../member/doLogout?afterLogoutUri=" + "/";
+		case "/adm/memberAndArticle/list":
 			return "../member/doLogout?afterLogoutUri=" + "/";
 		}
 
@@ -155,7 +177,7 @@ public class Rq {
 		return getEncodedCurrentUri();
 	}
 
-	private String getAfterLoginUri() {
+	public String getAfterLoginUri() {
 //		로그인 후 접근 불가 페이지
 
 		String requestUri = req.getRequestURI();
@@ -174,11 +196,11 @@ public class Rq {
 	}
 
 	public String getArticleDetailUriFromArticleList(Article article) {
-		return "../article/detail?id=" + article.getId() + "&listUri=" + getEncodedCurrentUri();
+		return "/usr/article/detail?id=" + article.getId() + "&listUri=" + getEncodedCurrentUri();
 	}
 
 	public String getFindLoginIdUri() {
-		return "../member/findLoginId?afterFindLoginIdUri=" + getAfterFindLoginIdUri();
+		return "/usr/member/findLoginId?afterFindLoginIdUri=" + getAfterFindLoginIdUri();
 	}
 
 	private String getAfterFindLoginIdUri() {
@@ -186,11 +208,19 @@ public class Rq {
 	}
 
 	public String getFindLoginPwUri() {
-		return "../member/findLoginPw?afterFindLoginPwUri=" + getAfterFindLoginPwUri();
+		return "/usr/member/findLoginPw?afterFindLoginPwUri=" + getAfterFindLoginPwUri();
 	}
 
 	private String getAfterFindLoginPwUri() {
 		return getEncodedCurrentUri();
+	}
+
+	public boolean isAdmin() {
+		if (isLogined == false) {
+			return false;
+		}
+
+		return loginedMember.isAdmin();
 	}
 
 }
