@@ -9,40 +9,59 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.KoreaIT.cwy.demo.service.ArticleService;
 import com.KoreaIT.cwy.demo.service.MemberService;
 import com.KoreaIT.cwy.demo.util.Ut;
+import com.KoreaIT.cwy.demo.vo.Article;
 import com.KoreaIT.cwy.demo.vo.Member;
 import com.KoreaIT.cwy.demo.vo.Rq;
 
 @Controller
 public class AdmMemberController {
-
+	@Autowired
+	private ArticleService articleService;
 	@Autowired
 	private MemberService memberService;
 	@Autowired
 	private Rq rq;
 
 	@RequestMapping("/adm/memberAndArticle/list")
-	public String showList(Model model, @RequestParam(defaultValue = "0") String authLevel,
-			@RequestParam(defaultValue = "loginId,name,nickname") String searchKeywordTypeCode,
-			@RequestParam(defaultValue = "") String searchKeyword, @RequestParam(defaultValue = "1") int page) {
+	public String showList(Model model, @RequestParam(defaultValue = "0") int boardId,
+			@RequestParam(defaultValue = "0") String authLevel,
+			@RequestParam(defaultValue = "loginId,name,nickname") String MsearchKeywordTypeCode,
+			@RequestParam(defaultValue = "") String MsearchKeyword, @RequestParam(defaultValue = "1") int Mpage,
+			@RequestParam(defaultValue = "title,body") String AsearchKeywordTypeCode,
+			@RequestParam(defaultValue = "") String AsearchKeyword, @RequestParam(defaultValue = "1") int Apage) {
 
-		int membersCount = memberService.getMembersCount(authLevel, searchKeywordTypeCode, searchKeyword);
+		int membersCount = memberService.getMembersCount(authLevel, MsearchKeywordTypeCode, MsearchKeyword);
+		int articlesCount = articleService.getArticlesCount(boardId, AsearchKeywordTypeCode, AsearchKeyword);
 
-		int itemsInAPage = 10;
-		int pagesCount = (int) Math.ceil((double) membersCount / itemsInAPage);
+		int memberItemsInAPage = 10;
+		int memberPagesCount = (int) Math.ceil((double) membersCount / memberItemsInAPage);
 
-		List<Member> members = memberService.getForPrintMembers(authLevel, searchKeywordTypeCode, searchKeyword,
-				itemsInAPage, page);
+		int articleItemsInAPage = 10;
+		int articlePagesCount = (int) Math.ceil((double) articlesCount / articleItemsInAPage);
+
+		List<Member> members = memberService.getForPrintMembers(authLevel, MsearchKeyword, MsearchKeyword,
+				memberItemsInAPage, Mpage);
+
+		List<Article> articles = articleService.getForPrintArticles(boardId, articleItemsInAPage, Apage,
+				AsearchKeywordTypeCode, AsearchKeyword);
 
 		model.addAttribute("authLevel", authLevel);
-		model.addAttribute("searchKeywordTypeCode", searchKeywordTypeCode);
-		model.addAttribute("searchKeyword", searchKeyword);
+		model.addAttribute("MsearchKeywordTypeCode", MsearchKeywordTypeCode);
+		model.addAttribute("MsearchKeyword", MsearchKeyword);
+		model.addAttribute("AsearchKeywordTypeCode", AsearchKeywordTypeCode);
+		model.addAttribute("AsearchKeyword", AsearchKeyword);
+
+		model.addAttribute("articlePagesCount", articlePagesCount);
+		model.addAttribute("memberPagesCount", memberPagesCount);
 
 		model.addAttribute("membersCount", membersCount);
-		model.addAttribute("pagesCount", pagesCount);
+		model.addAttribute("articlesCount", articlesCount);
 
 		model.addAttribute("members", members);
+		model.addAttribute("articles", articles);
 
 		return "adm/memberAndArticle/list";
 	}
