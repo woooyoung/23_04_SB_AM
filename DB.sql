@@ -214,7 +214,7 @@ CREATE TABLE reply (
     memberId INT(10) UNSIGNED NOT NULL,
     relTypeCode CHAR(50) NOT NULL COMMENT '관련 데이터 타입 코드',
     relId INT(10) NOT NULL COMMENT '관련 데이터 번호',
-    `body`text NOT NULL
+    `body`TEXT NOT NULL
 );
 
 # 2번 회원이 1번 글에 
@@ -261,9 +261,30 @@ ALTER TABLE reply ADD COLUMN badReactionPoint INT(10) UNSIGNED NOT NULL DEFAULT 
 ALTER TABLE `SB_AM_04`.`reply` ADD KEY `relTypeCodeId` (`relTypeCode` , `relId`);
 
 # 기존의 회원 비번을 암호화
-update `member`
-set loginPw = sha2(loginPw,256);
+UPDATE `member`
+SET loginPw = SHA2(loginPw,256);
 
+# 파일 테이블 추가
+CREATE TABLE genFile (
+  id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT, # 번호
+  regDate DATETIME DEFAULT NULL, # 작성날짜
+  updateDate DATETIME DEFAULT NULL, # 갱신날짜
+  delDate DATETIME DEFAULT NULL, # 삭제날짜
+  delStatus TINYINT(1) UNSIGNED NOT NULL DEFAULT 0, # 삭제상태(0:미삭제,1:삭제)
+  relTypeCode CHAR(50) NOT NULL, # 관련 데이터 타입(article, member)
+  relId INT(10) UNSIGNED NOT NULL, # 관련 데이터 번호
+  originFileName VARCHAR(100) NOT NULL, # 업로드 당시의 파일이름
+  fileExt CHAR(10) NOT NULL, # 확장자
+  typeCode CHAR(20) NOT NULL, # 종류코드 (common)
+  type2Code CHAR(20) NOT NULL, # 종류2코드 (attatchment)
+  fileSize INT(10) UNSIGNED NOT NULL, # 파일의 사이즈
+  fileExtTypeCode CHAR(10) NOT NULL, # 파일규격코드(img, video)
+  fileExtType2Code CHAR(10) NOT NULL, # 파일규격2코드(jpg, mp4)
+  fileNo SMALLINT(2) UNSIGNED NOT NULL, # 파일번호 (1)
+  fileDir CHAR(20) NOT NULL, # 파일이 저장되는 폴더명
+  PRIMARY KEY (id),
+  KEY relId (relTypeCode,relId,typeCode,type2Code,fileNo)
+);
 
 ###################################################################
 SELECT * FROM article;
@@ -271,6 +292,7 @@ SELECT * FROM `member`;
 SELECT * FROM board;
 SELECT * FROM reactionPoint;
 SELECT * FROM `reply`;
+SELECT * FROM `genFile`;
 
 SELECT SHA2('1b4f0e9851971998e732078544c96b36c3d01cedf7caa332359d6f1d83567014',256);
 
@@ -279,7 +301,7 @@ SELECT R.*, M.nickname AS extra__writer
 				LEFT JOIN `member` AS M
 				ON R.memberId = M.id
 				
-explain SELECT R.*, M.nickname AS extra__writer
+EXPLAIN SELECT R.*, M.nickname AS extra__writer
 FROM reply AS R
 LEFT JOIN `member` AS M
 ON R.memberId = M.id

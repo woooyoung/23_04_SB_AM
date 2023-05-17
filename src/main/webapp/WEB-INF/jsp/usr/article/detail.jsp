@@ -72,7 +72,14 @@
 							<span class="article-detail__hit-count">${article.hitCount }</span>
 						</td>
 					</tr>
-
+					<tr>
+						<th>첨부 이미지</th>
+						<td>
+							<img class="w-full rounded-xl" src="${rq.getImgUri(article.id)}"
+								onerror="${rq.profileFallbackImgOnErrorHtml}" alt="" />
+							<div>${rq.getImgUri(article.id)}</div>
+						</td>
+					</tr>
 					<tr>
 						<th>추천</th>
 						<td>

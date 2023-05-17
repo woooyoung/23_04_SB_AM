@@ -41,7 +41,8 @@
 <section class="mt-8 text-xl">
 	<div class="container mx-auto px-3">
 		<div class="table-box-type-1">
-			<form action="../article/doWrite" method="POST" onsubmit="ArticleWrite__submit(this); return false;">
+			<form action="../article/doWrite" method="POST" onsubmit="ArticleWrite__submit(this); return false;"
+				enctype="multipart/form-data">
 				<input type="hidden" name="body">
 				<table>
 					<colgroup>
@@ -75,7 +76,7 @@
 						<tr>
 							<th>첨부 이미지</th>
 							<td>
-								<input name="fileImg" placeholder="첨부파일을 선택해주세요" type="file" />
+								<input name="file__article__0__extra__Img__1" placeholder="이미지를 선택해주세요" type="file" />
 							</td>
 						</tr>
 						<tr>

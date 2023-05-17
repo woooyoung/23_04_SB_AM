@@ -29,7 +29,7 @@ spring:
 mybatis:
   type-aliases-package: com.KoreaIT.cwy.demo.vo
 custom:
-  genFileDirPath: C:\workspace_cwy\sts-4.18.0.RELEASE-workspace
+  genFileDirPath: C:\workspace_cwy\sts-4.18.0.RELEASE-workspace\demo-1\images
   siteName: SB_AM_04
   siteMainUri: http://localhost:8081
   emailFrom: no-reply@localhost
