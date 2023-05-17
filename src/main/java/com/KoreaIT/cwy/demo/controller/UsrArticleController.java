@@ -1,6 +1,7 @@
 package com.KoreaIT.cwy.demo.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,9 +9,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartRequest;
 
 import com.KoreaIT.cwy.demo.service.ArticleService;
 import com.KoreaIT.cwy.demo.service.BoardService;
+import com.KoreaIT.cwy.demo.service.GenFileService;
 import com.KoreaIT.cwy.demo.service.ReactionPointService;
 import com.KoreaIT.cwy.demo.service.ReplyService;
 import com.KoreaIT.cwy.demo.util.Ut;
@@ -33,6 +37,9 @@ public class UsrArticleController {
 	private Rq rq;
 	@Autowired
 	private ReactionPointService reactionPointService;
+
+	@Autowired
+	private GenFileService genFileService;
 
 	@RequestMapping("/usr/article/list")
 	public String showList(Model model, @RequestParam(defaultValue = "1") int boardId,
@@ -133,7 +140,8 @@ public class UsrArticleController {
 
 	@RequestMapping("/usr/article/doWrite")
 	@ResponseBody
-	public String doWrite(int boardId, String title, String body, String replaceUri) {
+	public String doWrite(int boardId, String title, String body, String replaceUri,
+			MultipartRequest multipartRequest) {
 
 		if (Ut.empty(title)) {
 			return rq.jsHistoryBack("F-1", "제목을 입력해주세요");
@@ -148,6 +156,16 @@ public class UsrArticleController {
 
 		if (Ut.empty(replaceUri)) {
 			replaceUri = Ut.f("../article/detail?id=%d", id);
+		}
+
+		Map<String, MultipartFile> fileMap = multipartRequest.getFileMap();
+
+		for (String fileInputName : fileMap.keySet()) {
+			MultipartFile multipartFile = fileMap.get(fileInputName);
+
+			if (multipartFile.isEmpty() == false) {
+				genFileService.save(multipartFile, id);
+			}
 		}
 
 		return rq.jsReplace(Ut.f("%d번 글이 생성되었습니다", id), replaceUri);

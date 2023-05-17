@@ -73,6 +73,12 @@
 							</td>
 						</tr>
 						<tr>
+							<th>첨부 이미지</th>
+							<td>
+								<input name="fileImg" placeholder="첨부파일을 선택해주세요" type="file" />
+							</td>
+						</tr>
+						<tr>
 							<th>내용</th>
 							<td>
 								<%-- 								<textarea class="input input-bordered w-full max-w-xs" type="text" name="body" placeholder="내용을 입력해주세요" />${article.body }</textarea> --%>

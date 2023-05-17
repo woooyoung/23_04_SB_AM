@@ -83,13 +83,19 @@
 			<artifactId>spring-context-support</artifactId>
 		</dependency>
 
-		<!-- 메일을 보내기 위한 -->
+		<!-- 메일 보내기 위한 -->
 		<dependency>
 			<groupId>com.sun.mail</groupId>
 			<artifactId>javax.mail</artifactId>
 			<version>1.6.2</version>
 		</dependency>
 		
+		<!-- 파일 업로드를 위한 -->
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>31.1-jre</version>
+		</dependency>
 
 	</dependencies>
 
