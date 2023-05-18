@@ -42,11 +42,13 @@
 				<table class="table table-fixed w-full">
 					<colgroup>
 						<col width="70" />
-						<col width="140" />
-						<col width="140" />
-						<col width="140" />
-						<col width="140" />
-						<col width="140" />
+						<col width="70" />
+						<col width="100" />
+						<col width="100" />
+						<col width="100" />
+						<col width="100" />
+						<col width="150" />
+						<col width="100" />
 					</colgroup>
 					<thead>
 						<tr>
@@ -59,6 +61,8 @@
 							<th>아이디</th>
 							<th>이름</th>
 							<th>닉네임</th>
+							<th>탈퇴여부 0: 전 / 1: 후</th>
+							<th>옆에놈을 풀어서 설명</th>
 						</tr>
 					</thead>
 
@@ -74,6 +78,8 @@
 								<td>${member.loginId}</td>
 								<td>${member.name}</td>
 								<td>${member.nickname}</td>
+								<td>${member.delStatus}</td>
+								<td>${member.delStatus == true ? '정지' : '활동' }</td>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -100,6 +106,7 @@
 			</div>
 
 			<form hidden method="POST" name="do-delete-members-form" action="../memberAndArticle/doDeleteMembers">
+				<input type="hidden" name="replaceUri" value="${rq.currentUri}" />
 				<input type="hidden" name="ids" value="" />
 			</form>
 
@@ -239,6 +246,7 @@
 			</div>
 
 			<form hidden method="POST" name="do-delete-articles-form" action="../memberAndArticle/doDeleteArticles">
+				<input type="hidden" name="replaceUri" value="${rq.currentUri}" />
 				<input type="hidden" name="ids" value="" />
 			</form>
 

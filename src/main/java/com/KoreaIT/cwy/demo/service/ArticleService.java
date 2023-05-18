@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.KoreaIT.cwy.demo.repository.ArticleRepository;
 import com.KoreaIT.cwy.demo.util.Ut;
 import com.KoreaIT.cwy.demo.vo.Article;
+import com.KoreaIT.cwy.demo.vo.Member;
 import com.KoreaIT.cwy.demo.vo.ResultData;
 
 @Service
@@ -154,6 +155,24 @@ public class ArticleService {
 		}
 		return ResultData.from("S-1", "싫어요 감소", "affectedRow", affectedRow);
 
+	}
+
+	public Article getArticleById(int id) {
+		return articleRepository.getArticle(id);
+	}
+
+	public void deleteArticles(List<Integer> articleIds) {
+		for (int articleId : articleIds) {
+			Article article = getArticleById(articleId);
+
+			if (article != null) {
+				deleteArticle(article);
+			}
+		}
+	}
+
+	private void deleteArticle(Article article) {
+		articleRepository.deleteArticle(article.getId());
 	}
 
 }
