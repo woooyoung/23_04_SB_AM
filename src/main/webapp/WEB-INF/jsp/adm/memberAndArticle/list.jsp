@@ -48,6 +48,9 @@
 					</colgroup>
 					<thead>
 						<tr>
+							<th>
+								<input type="checkbox" class="checkbox-all-member-id" />
+							</th>
 							<th>번호</th>
 							<th>가입날짜</th>
 							<th>수정날짜</th>
@@ -60,6 +63,9 @@
 					<tbody>
 						<c:forEach var="member" items="${members }">
 							<tr class="hover">
+								<th>
+									<input type="checkbox" class="checkbox-member-id" value="${member.id }" />
+								</th>
 								<td>${member.id}</td>
 								<td>${member.forPrintType1RegDate}</td>
 								<td>${member.forPrintType1UpdateDate}</td>
@@ -136,6 +142,9 @@
 					</colgroup>
 					<thead>
 						<tr>
+							<th>
+								<input type="checkbox" class="checkbox-all-article-id" />
+							</th>
 							<th>번호</th>
 							<th>날짜</th>
 							<th>제목</th>
@@ -149,6 +158,9 @@
 					<tbody>
 						<c:forEach var="article" items="${articles }">
 							<tr class="hover">
+								<th>
+									<input type="checkbox" class="checkbox-article-id" value="${article.id }" />
+								</th>
 								<td>
 									<div class="badge">${article.id}</div>
 								</td>

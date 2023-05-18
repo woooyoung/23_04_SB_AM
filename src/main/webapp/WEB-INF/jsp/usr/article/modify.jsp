@@ -75,6 +75,7 @@
 									value="${article.title }" />
 							</td>
 						</tr>
+
 						<tr>
 							<th>내용</th>
 							<td>

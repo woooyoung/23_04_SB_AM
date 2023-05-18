@@ -235,4 +235,8 @@ public class Rq {
 		return "this.src = '" + getProfileFallbackImgUri() + "'";
 	}
 
+	public String getRemoveProfileImgIfNotExitOnErrorHtmlAttr() {
+		return "$(this).remove()";
+	}
+
 }
