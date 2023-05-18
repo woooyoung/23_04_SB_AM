@@ -113,6 +113,10 @@ public class UsrMemberController {
 			return Ut.jsHistoryBack("F-4", Ut.f("비밀번호가 일치하지 않습니다!!!!!"));
 		}
 
+		if (member.isDelStatus() == true) {
+			return Ut.jsReplace("사용정지된 계정이야", "/");
+		}
+
 		rq.login(member);
 
 		// 우리가 갈 수 있는 경로를 경우의 수로 표현
